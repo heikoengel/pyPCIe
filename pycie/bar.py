@@ -56,8 +56,9 @@ class Bar(object):
         # write to map. no ret. check: ValueError/TypeError is raised on error
         self.__map.write(reg)
         # Flush current page for immediate update.
-        if self.__map.flush(offset & ~(PAGESIZE-1), PAGESIZE) is not None:
-            raise RuntimeError("Failed to flush ")
+        page_offset = offset & (~(PAGESIZE - 1) & 0xffffffff)
+        self.__map.flush(page_offset, PAGESIZE)
+        # TODO: check return value, only for >=Python3.8
 
     @property
     def size(self):
