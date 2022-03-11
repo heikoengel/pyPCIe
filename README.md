@@ -1,14 +1,14 @@
 # pyPCIe: Simple Python Module to access PCIe Endpoint BARs
 
-PyCIe provides a quick way to read/write registers in PCIe Base
+pyPCIe provides a quick way to read/write registers in PCIe Base
 Address Register (BAR) regions.
 
-PyCIe `mmap`s PCIe device BARs via the `resourceX` files in
+pyPCIe `mmap`s PCIe device BARs via the `resourceX` files in
 `/sys/bus/pci/devices/[bus_id]` for read/write and provides functions
 for 32 bit read/write requests.
 
 *Note: the `resourceX` files in sysfs are typically only accessible as
-root. The python scripts using PyCIe might need to be run as root.*
+root. The python scripts using pyPCIe might need to be run as root.*
 
 ## Example
 
