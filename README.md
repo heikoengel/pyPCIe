@@ -1,4 +1,4 @@
-# PyCIe: Simple Python Module to access PCIe Endpoint BARs
+# pyPCIe: Simple Python Module to access PCIe Endpoint BARs
 
 PyCIe provides a quick way to read/write registers in PCIe Base
 Address Register (BAR) regions.
@@ -13,7 +13,7 @@ root. The python scripts using PyCIe might need to be run as root.*
 ## Example
 
 ```python
-from pycie import Device
+from pypcie import Device
 
 # Bind to PCI device at "0000:03:00.0"
 d = Device("0000:03:00.0")

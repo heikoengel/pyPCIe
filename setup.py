@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1'
+VERSION = '0.1.0'
 DESCRIPTION = 'Simple Python module to access PCIe devices'
 with open("README.md", "r", encoding="utf-8") as fh:
     LONG_DESCRIPTION = fh.read()
 
 # Setting up
 setup(
-    name="PyCIe",
+    name="pyPCIe",
     version=VERSION,
     author="Heiko Engel",
     author_email="<heikoengel@users.noreply.github.com>",
@@ -15,7 +15,7 @@ setup(
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    url="https://github.com/heikoengel/PyCIe",
+    url="https://github.com/heikoengel/pyPCIe",
     install_requires=[],
     keywords=['python', 'pcie'],
     classifiers= [
