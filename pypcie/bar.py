@@ -16,6 +16,7 @@ class Bar(object):
         self.__stat = os.stat(filename)
         fd = os.open(filename, os.O_RDWR)
         self.__map = mmap(fd, 0, prot=PROT_READ | PROT_WRITE)
+        os.close(fd)
 
     def __del__(self):
         if self.__map is not None:
