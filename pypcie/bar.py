@@ -42,8 +42,10 @@ class Bar(object):
 
         """
         self.__check_offset(offset)
-        reg = self.__map[offset:offset+4]
-        return unpack("<L", reg)[0]
+        mv   = memoryview(self.__map)
+        mmap = mv.cast('I')
+        reg  = mmap[int(offset/4)]
+        return reg
 
     def write(self, offset: int, data: int):
         """ Write a 32 bit / double word value to offset.
