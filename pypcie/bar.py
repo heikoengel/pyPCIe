@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import os
 from mmap import mmap, PROT_READ, PROT_WRITE, PAGESIZE
-from struct import pack, unpack
 
 
 class Bar(object):
@@ -43,8 +42,8 @@ class Bar(object):
         """
         self.__check_offset(offset)
         mv   = memoryview(self.__map)
-        mmap = mv.cast('I')
-        reg  = mmap[int(offset/4)]
+        mvmap = mv.cast('I')
+        reg  = mvmap[int(offset/4)]
         return reg
 
     def write(self, offset: int, data: int):
@@ -54,11 +53,10 @@ class Bar(object):
         :param int data: double word to write to the given BAR offset.
         """
         self.__check_offset(offset)
-        # self.__map.seek(offset)
         # create memory view and cast it as integer
         mv   = memoryview(self.__map)
-        mmap = mv.cast('I')
-        mmap[int(offset/4)] = data
+        mvmap = mv.cast('I')
+        mvmap[int(offset/4)] = data
         # Flush current page for immediate update.
         page_offset = offset & (~(PAGESIZE - 1) & 0xffffffff)
         self.__map.flush(page_offset, PAGESIZE)
