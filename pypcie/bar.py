@@ -42,8 +42,10 @@ class Bar(object):
 
         """
         self.__check_offset(offset)
-        reg = self.__map[offset:offset+4]
-        return unpack("<L", reg)[0]
+        mv   = memoryview(self.__map)
+        mmap = mv.cast('I')
+        reg  = mmap[int(offset/4)]
+        return reg
 
     def write(self, offset: int, data: int):
         """ Write a 32 bit / double word value to offset.
@@ -52,10 +54,11 @@ class Bar(object):
         :param int data: double word to write to the given BAR offset.
         """
         self.__check_offset(offset)
-        self.__map.seek(offset)
-        reg = pack("<L", data)
-        # write to map. no ret. check: ValueError/TypeError is raised on error
-        self.__map.write(reg)
+        # self.__map.seek(offset)
+        # create memory view and cast it as integer
+        mv   = memoryview(self.__map)
+        mmap = mv.cast('I')
+        mmap[int(offset/4)] = data
         # Flush current page for immediate update.
         page_offset = offset & (~(PAGESIZE - 1) & 0xffffffff)
         self.__map.flush(page_offset, PAGESIZE)
